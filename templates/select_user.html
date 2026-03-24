@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Valitse käyttäjä</title>
+</head>
+<body style="text-align:center;">
+
+<h2>Valitse käyttäjä</h2>
+
+{% for user in users %}
+    <p>
+        <a href="/set-user/{{ user }}">
+            <button>{{ user }}</button>
+        </a>
+    </p>
+{% endfor %}
+
+</body>
+</html>
