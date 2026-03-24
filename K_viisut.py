@@ -10,11 +10,11 @@ USERS = ["Jura", "Mirko", "Patrik", "Riko", "Tuomas"]
 POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
 
 SONGS = [
-    {"id": 1, "title": "Yzkäbabubaa", "file": "song1.mp3"},
-    {"id": 2, "title": "Sacco ja Vanzetti", "file": "song2.mp3"},
-    {"id": 3, "title": "Pikku-Tuomas", "file": "song3.mp3"},
-    {"id": 4, "title": "Jormakka", "file": "song4.mp3"},
-    {"id": 5, "title": "Simpukkamies", "file": "song5.mp3"}
+    {"id": 1, "title": "Paspartuu", "file": "Paspartuu klippi.mp3"},
+    {"id": 2, "title": "Jyrki feat. Neponen", "file": "Jyrki feat. Neponen klippi.mp3"},
+    {"id": 3, "title": "Kapselihuoneen Kaapo", "file": "Kapselihuoneen Kaapo klippi.mp3"},
+    {"id": 4, "title": "Kaksi naamaa", "file": "Kaksi naamaa klippi.mp3"},
+    {"id": 5, "title": "Jåger Mazer", "file": "Jåger Mazer klippi.mp3"}
 ]
 
 if not os.path.exists("rankings.json"):
@@ -81,14 +81,15 @@ def save_ranking():
 @app.route("/get-ranking")
 def get_ranking():
     user = session.get("user")
-    if not user:
-        return {"error": "Not logged in"}, 403
 
     try:
         with open("rankings.json", "r") as f:
             data = json.load(f)
-    except FileNotFoundError:
+    except:
         data = {}
+
+    if not user:
+        return {"ranking": []}
 
     return {"ranking": data.get(user, [])}
 
