@@ -13,7 +13,7 @@ USERS = ["Jura", "Mirko", "Patrik", "Riko", "Tuomas"]
 POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
 
 SONGS = [
-    {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fi.png", "file": "Paspartuu klippi.mp3"},
+    {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fr.png", "file": "Paspartuu klippi.mp3"},
     {"id": 2, "title": "Kynitty", "artist": "Jyrki feat. Neponen", "country": "qa.png", "file": "Jyrki feat. Neponen klippi.mp3"},
     {"id": 3, "title": "Muukalainen", "artist": "Kapselihuoneen Kaapo", "country": "saturn.png", "file": "Kapselihuoneen Kaapo klippi.mp3"},
     {"id": 4, "title": "-", "artist": "Kaksi naamaa", "country": "by.png", "file": "Kaksi naamaa klippi.mp3"},
