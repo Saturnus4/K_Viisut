@@ -13,12 +13,19 @@ USERS = ["Jura", "Mirko", "Patrik", "Riko", "Tuomas"]
 POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
 
 SONGS = [
-    {"id": 1, "title": "Paspartuu", "file": "Paspartuu klippi.mp3"},
-    {"id": 2, "title": "Jyrki feat. Neponen", "file": "Jyrki feat. Neponen klippi.mp3"},
-    {"id": 3, "title": "Kapselihuoneen Kaapo", "file": "Kapselihuoneen Kaapo klippi.mp3"},
-    {"id": 4, "title": "Kaksi naamaa", "file": "Kaksi naamaa klippi.mp3"},
-    {"id": 5, "title": "Jåger Mazer", "file": "Jåger Mazer klippi.mp3"}
+    {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fi.png", "file": "Paspartuu klippi.mp3"},
+    {"id": 2, "title": "Kynitty", "artist": "Jyrki feat. Neponen", "country": "qa.png", "file": "Jyrki feat. Neponen klippi.mp3"},
+    {"id": 3, "title": "Muukalainen", "artist": "Kapselihuoneen Kaapo", "country": "saturn.png", "file": "Kapselihuoneen Kaapo klippi.mp3"},
+    {"id": 4, "title": "-", "artist": "Kaksi naamaa", "country": "by.png", "file": "Kaksi naamaa klippi.mp3"},
+    {"id": 5, "title": "Ikean lihapulla", "artist": "Jåger Mazer", "country": "se.png", "file": "Jåger Mazer klippi.mp3"},
+    {"id": 6, "title": "Mun tunteet", "artist": "Barracks O'Bama", "country": "us.png", "file": "Barracks OBama klippi.mp3"},
+    {"id": 7, "title": "Nyt lähtee nirri", "artist": "Kaapon ystävät", "country": "ar.png", "file": "Kaapon ystävät, Nyt lähtee nirri klippi.mp3"},
+    {"id": 8, "title": "Tässä on Eteläafrikkalaisen selkäranka", "artist": "Kyrillos Turpaanvetajaios", "country": "cy.png", "file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka klippi.mp3"},
+    {"id": 9, "title": "Olé", "artist": "Polle", "country": "lv.png", "file": "Polle, Ole klippi.mp3"},
+    {"id": 10, "title": "Mä elän", "artist": "Ahmis Zoni", "country": "cu.png", "file": "Ahmis Zoni, Mä elän klippi.mp3"}
+
 ]
+#{"id": , "title": "", "artist": "", "country": "", "file": ""}
 
 def init_db():
     conn = sqlite3.connect("rankings.db")

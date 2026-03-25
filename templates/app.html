@@ -6,35 +6,53 @@
 
 <style> 
 
-body { 
-	text-align: center; 
-	font-family: Arial, sans-serif; 
-} 
-
 body {
-    height: 100%;   
-    margin: 0;
-    padding: 0;
     text-align: center;
+    font-family: Arial, sans-serif;
+
+    margin: 0;
+    padding: 0 0 50px 0; /* padding-bottom for space under button */
 
     background-image: url("/static/Polku.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: block; /* default is fine */
+}
 
+/* allow page to scroll */
+html, body {
+    min-height: 100%;
+}
+
+#song-list {
+    padding: 0;
+    margin: 0 auto;
+    width: 360px;
 }
 
 .rank {
-    width: 30px;
+    width: 35px;
+    text-align: right;
     font-weight: bold;
     font-size: 18px;
-    text-align: right;
+    margin-right: 10px;
+}
+
+.flag {
+    width: 30px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.artist {
+    font-weight: bold;
+}
+
+.title {
+    font-size: 12px;
+    color: #555;
 }
 
 .points {
@@ -43,6 +61,27 @@ body {
     font-size: 20px;
     font-weight: bold;
     margin-right: 10px;
+}
+
+button { 
+padding: 5px 10px; 
+font-size: 16px;
+} 
+
+.right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+margin-left: auto;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    text-align: left;
 }
 
 /* overlay */
@@ -68,23 +107,24 @@ gap: 10px;
 border: 1px solid black; 
 padding: 10px; 
 margin: 4px auto; 
-width: 300px; 
+width: 360px; 
 background-color: #f9f9f9; 
 cursor: grab; 
-transition: background-color 0.2s, transform 0.2s;
+transition: background-color 0.2s;
+
 } /* Dragged element (the one following cursor) */ 
 
 
-.gold {
-    background-color: #ffd700; /* gold */
+.song-item.gold {
+    background-color: #ffd700;
 }
 
-.silver {
-    background-color: #c0c0c0; /* silver */
+.song-item.silver {
+    background-color: #c0c0c0;
 }
 
-.bronze {
-    background-color: #cd7f32; /* bronze */
+.song-item.bronze {
+    background-color: #cd7f32;
 }
 
 .drag-ghost { 
@@ -101,10 +141,7 @@ background-color: #ddd;
 opacity: 0.5; 
 } 
 
-button { 
-padding: 5px 10px; 
-font-size: 16px;
-} 
+
 
 .song-content {
     display: flex;
@@ -135,13 +172,28 @@ font-size: 16px;
 <ul id="song-list" style="list-style-type: none; padding: 0;">
     {% for song in songs %}
         <li data-id="{{ song.id }}" class="song-item">
-    <span class="rank"></span>
+
+    <div class="rank">{{ loop.index }}.</div>
 
     <div class="song-content">
-        <span class="song-info">{{ song.title }}</span>
-        <span class="points"></span>
-        <button onclick="toggleSong(this, '{{ song.file }}')">▶</button>
+
+        <div class="left">
+            <img class="flag" src="/static/{{ song.country }}">
+
+            <div class="text">
+		<div class="artist">{{ song.artist }}</div>
+                <div class="title">{{ song.title }}</div>
+                
+            </div>
+        </div>
+
+        <div class="right">
+            <span class="points"></span>
+            <button onclick="toggleSong(this, '{{ song.file }}')">▶</button>
+        </div>
+
     </div>
+
 </li>
     {% endfor %}
 </ul>
@@ -164,16 +216,11 @@ function updateRanks() {
         rankSpan.textContent = (index + 1) + ". ";
 
         // Points
-        if (index < POINTS.length) {
-            pointsSpan.textContent = POINTS[index];
-        } else {
-            pointsSpan.textContent = "";
-        }
+        pointsSpan.textContent = index < POINTS.length ? POINTS[index] : "";
 
-        // Remove previous classes
+        // Apply medal colors to OUTER box
         item.classList.remove("gold", "silver", "bronze");
 
-        // Add top 3 highlighting
         if (index === 0) item.classList.add("gold");
         else if (index === 1) item.classList.add("silver");
         else if (index === 2) item.classList.add("bronze");
@@ -227,7 +274,7 @@ function toggleSong(button, file) {
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 <script>
 new Sortable(document.getElementById("song-list"), {
-    animation: 150,
+    animation: 200,
     ghostClass: "drag-ghost",
     chosenClass: "sortable-chosen",
     dragClass: "drag-dragging",
