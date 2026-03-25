@@ -1,7 +1,10 @@
 from flask import Flask, render_template, redirect, url_for, session, request
 import json
 import os
+import logging
+import sqlite3
 
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
@@ -16,6 +19,22 @@ SONGS = [
     {"id": 4, "title": "Kaksi naamaa", "file": "Kaksi naamaa klippi.mp3"},
     {"id": 5, "title": "Jåger Mazer", "file": "Jåger Mazer klippi.mp3"}
 ]
+
+def init_db():
+    conn = sqlite3.connect("rankings.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS rankings (
+            user TEXT PRIMARY KEY,
+            ranking TEXT
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+init_db()
 
 if not os.path.exists("rankings.json"):
     with open("rankings.json", "w") as f:
@@ -66,41 +85,55 @@ def save_ranking():
     if not user:
         return {"error": "Not logged in"}, 403
 
-    ranking = request.json.get("ranking")  # list of song IDs
+    ranking = request.json.get("ranking")
 
-    with open("rankings.json", "r") as f:
-        data = json.load(f)
+    conn = sqlite3.connect("rankings.db")
+    cursor = conn.cursor()
 
-    data[user] = ranking
+    cursor.execute("""
+        INSERT OR REPLACE INTO rankings (user, ranking)
+        VALUES (?, ?)
+    """, (user, json.dumps(ranking)))
 
-    with open("rankings.json", "w") as f:
-        json.dump(data, f, indent=2)
+    conn.commit()
+    conn.close()
 
     return {"status": "ok"}
 
 @app.route("/get-ranking")
 def get_ranking():
     user = session.get("user")
-
-    try:
-        with open("rankings.json", "r") as f:
-            data = json.load(f)
-    except:
-        data = {}
-
     if not user:
         return {"ranking": []}
 
-    return {"ranking": data.get(user, [])}
+    conn = sqlite3.connect("rankings.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT ranking FROM rankings WHERE user = ?", (user,))
+    row = cursor.fetchone()
+
+    conn.close()
+
+    if row:
+        return {"ranking": json.loads(row[0])}
+    else:
+        return {"ranking": []}
 
 @app.route("/results")
 def results():
-    with open("rankings.json") as f:
-        rankings = json.load(f)
+    conn = sqlite3.connect("rankings.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT ranking FROM rankings")
+    rows = cursor.fetchall()
+
+    conn.close()
 
     scores = {}
 
-    for user, ranking in rankings.items():
+    for row in rows:
+        ranking = json.loads(row[0])
+
         for i, song_id in enumerate(ranking):
             if i >= len(POINTS):
                 break
