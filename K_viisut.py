@@ -13,6 +13,7 @@ USERS = ["Jura", "Mirko", "Patrik", "Riko", "Tuomas"]
 POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
+
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 with conn.cursor() as cur:
