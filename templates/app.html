@@ -26,6 +26,49 @@ html, body {
     min-height: 100%;
 }
 
+.page {
+    display: flex;
+    justify-content: center; /* center the whole thing */
+    align-items: flex-start;
+    gap: 40px;
+}
+
+/* Main content stays centered */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Right-side buttons */
+.sidebar {
+    position: fixed;
+    right: 20px;
+    top: 100px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.side-buttons {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    z-index: 9999; 
+}
+
+.side-buttons button {
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 #song-list {
     padding: 0;
     margin: 0 auto;
@@ -165,6 +208,10 @@ opacity: 0.5;
 
 <body style="text-align:center;">
 
+<div class="page">
+
+    <div class="main">
+
 <h2>Kilppariviisut</h2>
 
 <h3>Kappaleet</h3>
@@ -199,6 +246,28 @@ opacity: 0.5;
 </ul>
 
 <button onclick="saveRanking()">Tallenna</button>
+
+    </div>
+
+   
+
+<div class="side-buttons">
+
+    <button onclick="window.location.href='/results'">
+        Tulokset
+    </button>
+
+    {% for u in users %}
+        {% if u != user %}
+            <button onclick="window.location.href='/user-results/{{ u }}'">
+                {{ u }}
+            </button>
+        {% endif %}
+    {% endfor %}
+
+</div>
+
+</div>
 
 <script>
 const POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1];

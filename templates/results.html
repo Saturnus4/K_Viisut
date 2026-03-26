@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tulokset</title>
+
+<style>
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("/static/Polku.jpg");
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+}
+
+/* container */
+.container {
+    width: 360px;
+    margin: 20px auto;
+}
+
+/* result row */
+.result-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 6px 0;
+    background-color: #f9f9f9;
+}
+
+/* medals */
+.result-item.gold {
+    background-color: #ffd700;
+}
+
+.result-item.silver {
+    background-color: #c0c0c0;
+}
+
+.result-item.bronze {
+    background-color: #cd7f32;
+}
+
+.rank {
+    width: 35px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.flag {
+    width: 30px;
+    height: 20px;
+}
+
+.text {
+    text-align: left;
+}
+
+.artist {
+    font-weight: bold;
+}
+
+.title {
+    font-size: 12px;
+    color: #555;
+}
+
+.points {
+    margin-left: auto;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* back button */
+.back-btn {
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Tulokset</h2>
+
+<div class="container">
+    {% for song in results %}
+    <div class="result-item
+        {% if loop.index == 1 %}gold
+        {% elif loop.index == 2 %}silver
+        {% elif loop.index == 3 %}bronze
+        {% endif %}
+    ">
+        <div class="rank">{{ loop.index }}.</div>
+
+        <img class="flag" src="/static/{{ song.country }}">
+
+        <div class="text">
+            <div class="artist">{{ song.artist }}</div>
+            <div class="title">{{ song.title }}</div>
+        </div>
+
+        <div class="points">{{ song.points }}</div>
+    </div>
+    {% endfor %}
+</div>
+
+<button class="back-btn" onclick="window.location.href='/app'">
+    ← Takaisin
+</button>
+
+</body>
+</html>

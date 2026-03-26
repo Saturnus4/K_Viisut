@@ -14,13 +14,15 @@ POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+def get_conn():
+    return psycopg2.connect(DATABASE_URL, sslmode='require')
 
-with conn.cursor() as cur:
-    cur.execute("""
-        CREATE TABLE IF NOT EXISTS rankings (
-            user_name TEXT PRIMARY KEY,
-            ranking JSON
+with get_conn() as conn:
+    with conn.cursor() as cur:
+        cur.execute("""
+            CREATE TABLE IF NOT EXISTS rankings (
+                user_name TEXT PRIMARY KEY,
+                ranking JSON
         );
     """)
     conn.commit()
@@ -80,7 +82,12 @@ def app_page():
     if not session.get("user"):
         return redirect(url_for("select_user"))
 
-    return render_template("app.html", user=session["user"], songs=SONGS)
+    return render_template(
+        "app.html",
+        user=session["user"],
+        songs=SONGS,
+        users=USERS   # 👈 THIS FIXES YOUR BUTTONS
+    )
 
 
 @app.route("/save-ranking", methods=["POST"])
@@ -132,11 +139,67 @@ def results():
         for i, song_id in enumerate(ranking):
             if i >= len(POINTS):
                 break
-
             scores[song_id] = scores.get(song_id, 0) + POINTS[i]
 
-    return scores
+    # Convert to full song data
+    result_list = []
+    for song in SONGS:
+        total = scores.get(song["id"], 0)
+        result_list.append({
+            "id": song["id"],
+            "title": song["title"],
+            "artist": song["artist"],
+            "country": song["country"],
+            "points": total
+        })
 
+    # Sort descending by points
+    result_list.sort(key=lambda x: x["points"], reverse=True)
+
+    return render_template("results.html", results=result_list)
+
+@app.route("/user-results/<username>")
+def user_results(username):
+    if username not in USERS:
+        return "Invalid user"
+
+    with conn.cursor() as cur:
+        cur.execute("""
+            SELECT ranking FROM rankings WHERE user_name = %s
+        """, (username,))
+        result = cur.fetchone()
+
+    if not result:
+        return render_template(
+            "app.html",
+            user=session["user"],
+            songs=SONGS,
+            users=USERS
+        )
+
+    ranking = result[0]
+
+    # Build song list with points
+    result_list = []
+    for i, song_id in enumerate(ranking):
+        song = next((s for s in SONGS if s["id"] == song_id), None)
+        if not song:
+            continue
+
+        points = POINTS[i] if i < len(POINTS) else 0
+
+        result_list.append({
+            "artist": song["artist"],
+            "title": song["title"],
+            "country": song["country"],
+            "points": points
+        })
+
+    return render_template(
+        "user_results.html",
+        results=result_list,
+        username=username
+    )
 
 
 
