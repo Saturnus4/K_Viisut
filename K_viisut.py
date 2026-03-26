@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for, session, request
 import json
 import os
 import logging
-import sqlite3
+import psycopg2
 
 logging.basicConfig(level=logging.INFO)
 
@@ -11,6 +11,17 @@ app.secret_key = "supersecretkey"
 PASSWORD = "Jormakka"
 USERS = ["Jura", "Mirko", "Patrik", "Riko", "Tuomas"]
 POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
+DATABASE_URL = "postgresql://postgres:Gimlaskevat4@db.oxuofwapjjimjgjnsurb.supabase.co:5432/postgres"
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+
+with conn.cursor() as cur:
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS rankings (
+            user_name TEXT PRIMARY KEY,
+            ranking JSON
+        );
+    """)
+    conn.commit()
 
 SONGS = [
     {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fr.png", "file": "Paspartuu klippi.mp3"},
@@ -27,25 +38,9 @@ SONGS = [
 ]
 #{"id": , "title": "", "artist": "", "country": "", "file": ""}
 
-def init_db():
-    conn = sqlite3.connect("rankings.db")
-    cursor = conn.cursor()
 
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS rankings (
-            user TEXT PRIMARY KEY,
-            ranking TEXT
-        )
-    """)
 
-    conn.commit()
-    conn.close()
 
-init_db()
-
-if not os.path.exists("rankings.json"):
-    with open("rankings.json", "w") as f:
-        f.write("{}")
 
 @app.route("/", methods=["GET", "POST"])
 def login():
@@ -94,16 +89,15 @@ def save_ranking():
 
     ranking = request.json.get("ranking")
 
-    conn = sqlite3.connect("rankings.db")
-    cursor = conn.cursor()
+    with conn.cursor() as cur:
+        cur.execute("""
+            INSERT INTO rankings (user_name, ranking)
+            VALUES (%s, %s)
+            ON CONFLICT (user_name)
+            DO UPDATE SET ranking = EXCLUDED.ranking;
+        """, (user, json.dumps(ranking)))
 
-    cursor.execute("""
-        INSERT OR REPLACE INTO rankings (user, ranking)
-        VALUES (?, ?)
-    """, (user, json.dumps(ranking)))
-
-    conn.commit()
-    conn.close()
+        conn.commit()
 
     return {"status": "ok"}
 
@@ -113,40 +107,31 @@ def get_ranking():
     if not user:
         return {"ranking": []}
 
-    conn = sqlite3.connect("rankings.db")
-    cursor = conn.cursor()
+    with conn.cursor() as cur:
+        cur.execute("""
+            SELECT ranking FROM rankings WHERE user_name = %s
+        """, (user,))
+        result = cur.fetchone()
 
-    cursor.execute("SELECT ranking FROM rankings WHERE user = ?", (user,))
-    row = cursor.fetchone()
-
-    conn.close()
-
-    if row:
-        return {"ranking": json.loads(row[0])}
+    if result:
+        return {"ranking": result[0]}
     else:
         return {"ranking": []}
 
 @app.route("/results")
 def results():
-    conn = sqlite3.connect("rankings.db")
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT ranking FROM rankings")
-    rows = cursor.fetchall()
-
-    conn.close()
-
     scores = {}
 
-    for row in rows:
-        ranking = json.loads(row[0])
+    with conn.cursor() as cur:
+        cur.execute("SELECT ranking FROM rankings")
+        all_rankings = cur.fetchall()
 
+    for (ranking,) in all_rankings:
         for i, song_id in enumerate(ranking):
             if i >= len(POINTS):
                 break
 
-            points = POINTS[i]
-            scores[song_id] = scores.get(song_id, 0) + points
+            scores[song_id] = scores.get(song_id, 0) + POINTS[i]
 
     return scores
 
