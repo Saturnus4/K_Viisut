@@ -32,6 +32,9 @@ SONGS = [
      "file": "Ahmis Zoni, Mä elän klippi.mp3", "full_file": "Ahmis Zoni, Mä elän.mp3"},
     {"id": 6, "title": "Mun tunteet", "artist": "Barracks O'Bama", "country": "us.png",
      "file": "Barracks OBama klippi.mp3", "full_file": "Barracks OBama.mpeg"},
+    {"id": 12, "title": "DeathMetalPate", "artist": "Chile", "country": "cl.png", "file": "Chile, DeathMetalPate klippi.mp3", "full_file": "Chile, DeathMetalPate.mp3"},
+    {"id": 13, "title": "Leipuri Hiiva", "artist": "Costa Rica", "country": "cr.png", "file": "Costa Rica, Leipuri Hiiva klippi.mp3", "full_file": "Costa Rica, Leipuri Hiiva.mp3"},
+    {"id": 14, "title": "Kusi noussu hattuun taas", "artist": "Deata", "country": "it.png", "file": "Deata, Kusi noussu hattuun taas, Italia klippi.mp3", "full_file": "Deata, Kusi noussu hattuun taas, Italia.mp3"},
     {"id": 2, "title": "Kynitty", "artist": "Jyrki feat. Neponen", "country": "qa.png",
      "file": "Jyrki feat. Neponen klippi.mp3", "full_file": "Jyrki feat. Neponen - Kynitty, Qatar.mpeg"},
     {"id": 5, "title": "Ikean lihapulla", "artist": "Jåger Mazer", "country": "se.png",
@@ -45,8 +48,9 @@ SONGS = [
     {"id": 8, "title": "Tässä on Eteläafrikkalaisen selkäranka", "artist": "Kyrillos Turpaanvetajaios",
      "country": "cy.png", "file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka klippi.mp3",
      "full_file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka.mpeg"},
+    {"id": 11, "title": "Neuvostoliiton kansallislaulu", "artist": "Paavi", "country": "sg.pgn", "file": "Paavi, Neuvostoliiton kansallislaulu klippi.mp3", "full_file": "Paavi, Neuvostoliiton kansallislaulu.mp3"},
     {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fr.png", "file": "Paspartuu klippi.mp3", "full_file": "Paspartuu - Kyrsäkosken kasvatti, Ranska.mpeg"},
-    {"id": 9, "title": "Olé", "artist": "Polle", "country": "lv.png", "file": "Polle, Ole klippi.mp3", "full_file": "Polle, Ole.mpeg"}
+    {"id": 9, "title": "Olé", "artist": "Polle", "country": "lv.png", "file": "Polle, Ole klippi.mp3", "full_file": "Polle, Ole.mpeg"},
 
 
 ]
