@@ -409,11 +409,22 @@ window.addEventListener("DOMContentLoaded", () => {
             });
 
             // Append items in saved order
-            data.ranking.forEach(id => {
-                if (itemMap[id]) {
-                    songList.appendChild(itemMap[id]);
-                }
-            });
+            const used = new Set();
+
+// Add saved songs first
+data.ranking.forEach(id => {
+    if (itemMap[id]) {
+        songList.appendChild(itemMap[id]);
+        used.add(String(id));
+    }
+});
+
+// Add missing songs (new ones)
+items.forEach(item => {
+    if (!used.has(item.dataset.id)) {
+        songList.appendChild(item);
+    }
+});
 	updateRanks();
         }
     })
