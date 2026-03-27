@@ -13,7 +13,7 @@ body {
     margin: 0;
     padding: 0 0 50px 0; /* padding-bottom for space under button */
 
-    background-image: url("/static/Polku.jpg");
+    background-image: url("/static/Taustakuva.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -54,6 +54,7 @@ html, body {
 .side-buttons {
     position: fixed;
     right: 10px;
+    padding: 10px 20px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -64,8 +65,8 @@ html, body {
 }
 
 .side-buttons button {
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 15px 20px;
+    font-size: 16px;
     cursor: pointer;
 }
 
@@ -202,6 +203,13 @@ opacity: 0.5;
     text-align: left;
 }
 
+.tallenna-btn{
+	margin-top: 20px;
+    margin-bottom: 20px; 
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
 </style>
 
 </head>
@@ -245,7 +253,7 @@ opacity: 0.5;
     {% endfor %}
 </ul>
 
-<button onclick="saveRanking()">Tallenna</button>
+<button class="tallenna-btn" onclick="saveRanking()">Tallenna</button>
 
     </div>
 
@@ -264,6 +272,10 @@ opacity: 0.5;
             </button>
         {% endif %}
     {% endfor %}
+
+<button onclick="window.location.href='/full-songs'">
+    Kappaleet kokonaan
+</button>
 
 </div>
 

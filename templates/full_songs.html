@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kappaleet kokonaan</title>
+
+<style>
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+
+    background-image: url("/static/Taustakuva.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    padding-bottom: 50px;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+/* list */
+#song-list {
+    margin: 0 auto;
+    width: 360px;
+    padding: 0;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 4px auto;
+    background-color: #f9f9f9;
+}
+
+.flag {
+    width: 30px;
+    height: 20px;
+}
+
+.text {
+    text-align: left;
+}
+
+.artist {
+    font-weight: bold;
+}
+
+.title {
+    font-size: 12px;
+    color: #555;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;   
+    align-items: flex-end;    
+    gap: 5px;
+    margin-left: auto;
+align-items: center;
+}
+
+/* overlay */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;                
+    background: rgba(255,255,255,0.2);
+    z-index: -1;
+}
+
+button { 
+padding: 5px 10px; 
+font-size: 16px;
+} 
+
+.progress {
+    width: 120px;
+    cursor: pointer;
+}
+
+.bottom-button {
+    margin-top: 20px;
+    margin-bottom: 40px; 
+    padding: 10px 20px;
+font-size: 16px;
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Kappaleet kokonaan</h2>
+
+<ul id="song-list">
+{% for song in songs %}
+<li class="song-item">
+
+    <img class="flag" src="/static/{{ song.country }}">
+
+    <div class="text">
+        <div class="artist">{{ song.artist }}</div>
+        <div class="title">{{ song.title }}</div>
+    </div>
+
+    <div class="right">
+    <button onclick="toggleSong(this, '{{ song.full_file }}')">▶</button>
+    <input type="range" value="0" min="0" step="1" class="progress">
+</div>
+
+</li>
+{% endfor %}
+</ul>
+
+<br>
+<button class="bottom-button" onclick="window.location.href='/app'">← Takaisin</button>
+
+<script>
+let currentAudio = null;
+let currentButton = null;
+let currentSlider = null;
+
+function toggleSong(button, file) {
+
+    const slider = button.parentElement.querySelector(".progress");
+
+    // Toggle same song
+    if (currentAudio && currentButton === button) {
+        if (!currentAudio.paused) {
+            currentAudio.pause();
+            button.textContent = "▶";
+        } else {
+            currentAudio.play();
+            button.textContent = "⏸";
+        }
+        return;
+    }
+
+    // Stop previous
+    if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+
+        if (currentButton) currentButton.textContent = "▶";
+        if (currentSlider) currentSlider.value = 0;
+    }
+
+    // Start new
+    currentAudio = new Audio("/static/" + file);
+    currentButton = button;
+    currentSlider = slider;
+
+    currentAudio.play();
+    button.textContent = "⏸";
+
+    // Update slider as song plays
+    currentAudio.ontimeupdate = () => {
+        if (currentAudio.duration) {
+            slider.max = currentAudio.duration;
+            slider.value = currentAudio.currentTime;
+        }
+    };
+
+    // Allow seeking
+    slider.oninput = () => {
+        currentAudio.currentTime = slider.value;
+    };
+
+    // Reset when finished
+    currentAudio.onended = () => {
+        button.textContent = "▶";
+        slider.value = 0;
+        currentAudio = null;
+        currentButton = null;
+        currentSlider = null;
+    };
+}
+</script>
+
+</body>
+</html>

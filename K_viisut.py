@@ -28,19 +28,19 @@ with get_conn() as conn:
     conn.commit()
 
 SONGS = [
-    {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fr.png", "file": "Paspartuu klippi.mp3"},
-    {"id": 2, "title": "Kynitty", "artist": "Jyrki feat. Neponen", "country": "qa.png", "file": "Jyrki feat. Neponen klippi.mp3"},
-    {"id": 3, "title": "Muukalainen", "artist": "Kapselihuoneen Kaapo", "country": "saturn.png", "file": "Kapselihuoneen Kaapo klippi.mp3"},
-    {"id": 4, "title": "-", "artist": "Kaksi naamaa", "country": "by.png", "file": "Kaksi naamaa klippi.mp3"},
-    {"id": 5, "title": "Ikean lihapulla", "artist": "Jåger Mazer", "country": "se.png", "file": "Jåger Mazer klippi.mp3"},
-    {"id": 6, "title": "Mun tunteet", "artist": "Barracks O'Bama", "country": "us.png", "file": "Barracks OBama klippi.mp3"},
-    {"id": 7, "title": "Nyt lähtee nirri", "artist": "Kaapon ystävät", "country": "ar.png", "file": "Kaapon ystävät, Nyt lähtee nirri klippi.mp3"},
-    {"id": 8, "title": "Tässä on Eteläafrikkalaisen selkäranka", "artist": "Kyrillos Turpaanvetajaios", "country": "cy.png", "file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka klippi.mp3"},
-    {"id": 9, "title": "Olé", "artist": "Polle", "country": "lv.png", "file": "Polle, Ole klippi.mp3"},
-    {"id": 10, "title": "Mä elän", "artist": "Ahmis Zoni", "country": "cu.png", "file": "Ahmis Zoni, Mä elän klippi.mp3"}
+    {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fr.png", "file": "Paspartuu klippi.mp3", "full_file": "Paspartuu - Kyrsäkosken kasvatti, Ranska.mpeg"},
+    {"id": 2, "title": "Kynitty", "artist": "Jyrki feat. Neponen", "country": "qa.png", "file": "Jyrki feat. Neponen klippi.mp3", "full_file": "Jyrki feat. Neponen - Kynitty, Qatar.mpeg"},
+    {"id": 3, "title": "Muukalainen", "artist": "Kapselihuoneen Kaapo", "country": "saturn.png", "file": "Kapselihuoneen Kaapo klippi.mp3", "full_file": "Kapselihuoneen Kaapo - Muukalainen, Avaruus.mpeg"},
+    {"id": 4, "title": "-", "artist": "Kaksi naamaa", "country": "by.png", "file": "Kaksi naamaa klippi.mp3", "full_file": "Valko-Venäjä Kaksi naamaa.mpeg"},
+    {"id": 5, "title": "Ikean lihapulla", "artist": "Jåger Mazer", "country": "se.png", "file": "Jåger Mazer klippi.mp3", "full_file": "Jåger Mazer - Ikean lihapulla, Ruotsi.mpeg"},
+    {"id": 6, "title": "Mun tunteet", "artist": "Barracks O'Bama", "country": "us.png", "file": "Barracks OBama klippi.mp3", "full_file": "Barracks OBama.mpeg"},
+    {"id": 7, "title": "Nyt lähtee nirri", "artist": "Kaapon ystävät", "country": "ar.png", "file": "Kaapon ystävät, Nyt lähtee nirri klippi.mp3", "full_file": "Kaapon ystävät, Nyt lähtee nirri.mpeg"},
+    {"id": 8, "title": "Tässä on Eteläafrikkalaisen selkäranka", "artist": "Kyrillos Turpaanvetajaios", "country": "cy.png", "file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka klippi.mp3", "full_file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka.mpeg"},
+    {"id": 9, "title": "Olé", "artist": "Polle", "country": "lv.png", "file": "Polle, Ole klippi.mp3", "full_file": "Polle, Ole.mpeg"},
+    {"id": 10, "title": "Mä elän", "artist": "Ahmis Zoni", "country": "cu.png", "file": "Ahmis Zoni, Mä elän klippi.mp3", "full_file": "Ahmis Zoni, Mä elän.mp3"}
 
 ]
-#{"id": , "title": "", "artist": "", "country": "", "file": ""}
+#{"id": , "title": "", "artist": "", "country": "", "file": "", "full_file": ""}
 
 
 
@@ -199,6 +199,16 @@ def user_results(username):
         "user_results.html",
         results=result_list,
         username=username
+    )
+
+@app.route("/full-songs")
+def full_songs():
+    if not session.get("logged_in"):
+        return redirect(url_for("login"))
+
+    return render_template(
+        "full_songs.html",
+        songs=SONGS
     )
 
 
