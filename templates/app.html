@@ -160,15 +160,19 @@ transition: background-color 0.2s;
 
 
 .song-item.gold {
-    background-color: #ffd700;
+	background: linear-gradient(to right, #ffd700, #f9f9f9);
 }
 
 .song-item.silver {
-    background-color: #c0c0c0;
+	background: linear-gradient(to right, #c0c0c0, #f9f9f9);
 }
 
 .song-item.bronze {
-    background-color: #cd7f32;
+	background: linear-gradient(to right, #cd7f32, #f9f9f9);
+}
+
+.song-item.top10_color {
+	background: linear-gradient(to right, #d6ecff, #f9f9f9);
 }
 
 .drag-ghost { 
@@ -299,15 +303,24 @@ function updateRanks() {
         // Points
         pointsSpan.textContent = index < POINTS.length ? POINTS[index] : "";
 
-        // Apply medal colors to OUTER box
-        item.classList.remove("gold", "silver", "bronze");
+        // Reset classes
+        item.classList.remove("gold", "silver", "bronze", "top10_color");
 
-        if (index === 0) item.classList.add("gold");
-        else if (index === 1) item.classList.add("silver");
-        else if (index === 2) item.classList.add("bronze");
+        // Apply colors
+        if (index === 0) {
+            item.classList.add("gold");
+        } 
+        else if (index === 1) {
+            item.classList.add("silver");
+        } 
+        else if (index === 2) {
+            item.classList.add("bronze");
+        } 
+        else if (index >= 3 && index <= 9) {
+            item.classList.add("top10_color");
+        }
     });
-}
-</script>
+}</script>
 
 <script>
 let currentAudio = null;

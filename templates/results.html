@@ -41,15 +41,19 @@ html, body {
 
 /* medals */
 .result-item.gold {
-    background-color: #ffd700;
+    background: linear-gradient(to right, #ffd700, #f9f9f9);
 }
 
 .result-item.silver {
-    background-color: #c0c0c0;
+    background: linear-gradient(to right, #c0c0c0, #f9f9f9);
 }
 
 .result-item.bronze {
-    background-color: #cd7f32;
+    background: linear-gradient(to right, #cd7f32, #f9f9f9);
+}
+
+.result-item.top10_color {
+	background: linear-gradient(to right, #d6ecff, #f9f9f9);
 }
 
 .rank {
@@ -114,6 +118,7 @@ body::before {
         {% if loop.index == 1 %}gold
         {% elif loop.index == 2 %}silver
         {% elif loop.index == 3 %}bronze
+	{% elif loop.index >= 4 and loop.index <= 10 %}top10_color
         {% endif %}
     ">
         <div class="rank">{{ loop.index }}.</div>
