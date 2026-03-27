@@ -48,7 +48,7 @@ SONGS = [
     {"id": 8, "title": "Tässä on Eteläafrikkalaisen selkäranka", "artist": "Kyrillos Turpaanvetajaios",
      "country": "cy.png", "file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka klippi.mp3",
      "full_file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka.mpeg"},
-    {"id": 11, "title": "Neuvostoliiton kansallislaulu", "artist": "Paavi", "country": "sg.pgn", "file": "Paavi, Neuvostoliiton kansallislaulu klippi.mp3", "full_file": "Paavi, Neuvostoliiton kansallislaulu.mp3"},
+    {"id": 11, "title": "Neuvostoliiton kansallislaulu", "artist": "Paavi", "country": "sg.png", "file": "Paavi, Neuvostoliiton kansallislaulu klippi.mp3", "full_file": "Paavi, Neuvostoliiton kansallislaulu.mp3"},
     {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fr.png", "file": "Paspartuu klippi.mp3", "full_file": "Paspartuu - Kyrsäkosken kasvatti, Ranska.mpeg"},
     {"id": 9, "title": "Olé", "artist": "Polle", "country": "lv.png", "file": "Polle, Ole klippi.mp3", "full_file": "Polle, Ole.mpeg"},
 
