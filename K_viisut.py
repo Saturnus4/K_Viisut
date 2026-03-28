@@ -17,15 +17,17 @@ DATABASE_URL = os.environ.get("DATABASE_URL")
 def get_conn():
     return psycopg2.connect(DATABASE_URL, sslmode='require')
 
-with get_conn() as conn:
-    with conn.cursor() as cur:
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS rankings (
-                user_name TEXT PRIMARY KEY,
-                ranking JSON
-        );
-    """)
-    conn.commit()
+def init_db():
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS rankings (
+                    user_name TEXT PRIMARY KEY,
+                    ranking JSON
+                );
+            """)
+
+init_db()
 
 SONGS = [
     {"id": 10, "title": "Mä elän", "artist": "Ahmis Zoni", "country": "cu.png",
@@ -112,13 +114,14 @@ def save_ranking():
 
     ranking = request.json.get("ranking")
 
-    with conn.cursor() as cur:
-        cur.execute("""
-            INSERT INTO rankings (user_name, ranking)
-            VALUES (%s, %s)
-            ON CONFLICT (user_name)
-            DO UPDATE SET ranking = EXCLUDED.ranking;
-        """, (user, json.dumps(ranking)))
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                INSERT INTO rankings (user_name, ranking)
+                VALUES (%s, %s)
+                ON CONFLICT (user_name)
+                DO UPDATE SET ranking = EXCLUDED.ranking;
+            """, (user, json.dumps(ranking)))
 
         conn.commit()
 
@@ -130,11 +133,12 @@ def get_ranking():
     if not user:
         return {"ranking": []}
 
-    with conn.cursor() as cur:
-        cur.execute("""
-            SELECT ranking FROM rankings WHERE user_name = %s
-        """, (user,))
-        result = cur.fetchone()
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT ranking FROM rankings WHERE user_name = %s
+            """, (user,))
+            result = cur.fetchone()
 
     if result:
         return {"ranking": result[0]}
@@ -145,9 +149,10 @@ def get_ranking():
 def results():
     scores = {}
 
-    with conn.cursor() as cur:
-        cur.execute("SELECT ranking FROM rankings")
-        all_rankings = cur.fetchall()
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT ranking FROM rankings")
+            all_rankings = cur.fetchall()
 
     for (ranking,) in all_rankings:
         for i, song_id in enumerate(ranking):
@@ -177,11 +182,12 @@ def user_results(username):
     if username not in USERS:
         return "Invalid user"
 
-    with conn.cursor() as cur:
-        cur.execute("""
-            SELECT ranking FROM rankings WHERE user_name = %s
-        """, (username,))
-        result = cur.fetchone()
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("""
+                SELECT ranking FROM rankings WHERE user_name = %s
+            """, (username,))
+            result = cur.fetchone()
 
     if not result:
         return render_template(
@@ -227,7 +233,6 @@ def full_songs():
 
 
 
-# Remove this entirely for Render
 if __name__ == "__main__":
      port = int(os.environ.get("PORT", 5000))  # default to 5000 locally
      app.run(host="0.0.0.0", port=port) # debug=True
