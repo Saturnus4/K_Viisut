@@ -102,7 +102,7 @@ def app_page():
         "app.html",
         user=session["user"],
         songs=SONGS,
-        users=USERS   # 👈 THIS FIXES YOUR BUTTONS
+        users=USERS
     )
 
 
@@ -159,6 +159,8 @@ def results():
             if i >= len(POINTS):
                 break
             scores[song_id] = scores.get(song_id, 0) + POINTS[i]
+            scores[13] = scores.get(song_id, 0) + POINTS[i] + 10000 #Aprillipila
+
 
     # Convert to full song data
     result_list = []
