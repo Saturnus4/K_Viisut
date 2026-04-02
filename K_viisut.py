@@ -159,7 +159,7 @@ def results():
             if i >= len(POINTS):
                 break
             scores[song_id] = scores.get(song_id, 0) + POINTS[i]
-            scores[13] = scores.get(song_id, 0) + POINTS[i] + 10000 #Aprillipila
+            #scores[13] = scores.get(song_id, 0) + POINTS[i] + 10000 #Aprillipila
 
 
     # Convert to full song data
