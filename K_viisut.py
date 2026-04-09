@@ -15,19 +15,25 @@ POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 def get_conn():
-    return psycopg2.connect(DATABASE_URL, sslmode='require')
+    try:
+        return psycopg2.connect(DATABASE_URL, sslmode='require')
+    except Exception as e:
+        print("DB connection error:", e)
+        return None
 
 def init_db():
-    with get_conn() as conn:
-        with conn.cursor() as cur:
-            cur.execute("""
-                CREATE TABLE IF NOT EXISTS rankings (
-                    user_name TEXT PRIMARY KEY,
-                    ranking JSON
-                );
-            """)
-
-init_db()
+    try:
+        with get_conn() as conn:
+            with conn.cursor() as cur:
+                cur.execute("""
+                    CREATE TABLE IF NOT EXISTS rankings (
+                        user_name TEXT PRIMARY KEY,
+                        ranking JSON
+                    );
+                """)
+                conn.commit()
+    except Exception as e:
+        print("DB init failed:", e)
 
 SONGS = [
     {"id": 10, "title": "Mä elän", "artist": "Ahmis Zoni", "country": "cu.png",
@@ -98,6 +104,8 @@ def app_page():
     if not session.get("user"):
         return redirect(url_for("select_user"))
 
+    init_db()
+
     return render_template(
         "app.html",
         user=session["user"],
@@ -114,7 +122,11 @@ def save_ranking():
 
     ranking = request.json.get("ranking")
 
-    with get_conn() as conn:
+    conn = get_conn()
+    if not conn:
+        return {"error": "Database unavailable"}, 500
+
+    with conn:
         with conn.cursor() as cur:
             cur.execute("""
                 INSERT INTO rankings (user_name, ranking)
@@ -133,7 +145,11 @@ def get_ranking():
     if not user:
         return {"ranking": []}
 
-    with get_conn() as conn:
+    conn = get_conn()
+    if not conn:
+        return {"error": "Database unavailable"}, 500
+
+    with conn:
         with conn.cursor() as cur:
             cur.execute("""
                 SELECT ranking FROM rankings WHERE user_name = %s
@@ -149,7 +165,11 @@ def get_ranking():
 def results():
     scores = {}
 
-    with get_conn() as conn:
+    conn = get_conn()
+    if not conn:
+        return {"error": "Database unavailable"}, 500
+
+    with conn:
         with conn.cursor() as cur:
             cur.execute("SELECT ranking FROM rankings")
             all_rankings = cur.fetchall()
@@ -184,7 +204,11 @@ def user_results(username):
     if username not in USERS:
         return "Invalid user"
 
-    with get_conn() as conn:
+    conn = get_conn()
+    if not conn:
+        return {"error": "Database unavailable"}, 500
+
+    with conn:
         with conn.cursor() as cur:
             cur.execute("""
                 SELECT ranking FROM rankings WHERE user_name = %s
