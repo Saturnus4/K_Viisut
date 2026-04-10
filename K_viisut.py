@@ -14,12 +14,20 @@ POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
+import time
+
 def get_conn():
-    try:
-        return psycopg2.connect(DATABASE_URL, sslmode='require')
-    except Exception as e:
-        print("DB connection error:", e)
-        return None
+    for attempt in range(2):
+        try:
+            return psycopg2.connect(
+                DATABASE_URL,
+                sslmode='require',
+                connect_timeout=5
+            )
+        except Exception as e:
+            print("DB connection failed:", e)
+            time.sleep(1)
+    return None
 
 def init_db():
     try:
@@ -41,7 +49,7 @@ SONGS = [
     {"id": 6, "title": "Mun tunteet", "artist": "Barracks O'Bama", "country": "us.png",
      "file": "Barracks OBama klippi.mp3", "full_file": "Barracks OBama.mpeg"},
     {"id": 12, "title": "DeathMetalPate", "artist": "Chile", "country": "cl.png", "file": "Chile, DeathMetalPate klippi.mp3", "full_file": "Chile, DeathMetalPate.mp3"},
-{"id": 16, "title": "OG-Pate", "artist": "Chile", "country": "cl.png", "file": "Chile, OG-Pate klippi.mp3", "full_file": "Chile, OG-Pate.mp3"},
+    {"id": 16, "title": "OG-Pate", "artist": "Chile", "country": "cl.png", "file": "Chile, OG-Pate klippi.mp3", "full_file": "Chile, OG-Pate.mp3"},
     {"id": 15, "title": "Cha Cha Cha", "artist": "Käärijä", "country": "fi.png", "file": "Käärijä, Cha Cha Cha klippi.mp3", "full_file": "Käärijä, Cha Cha Cha.mp3"},
     {"id": 13, "title": "Leipuri Hiiva", "artist": "Costa Rica", "country": "cr.png", "file": "Costa Rica, Leipuri Hiiva klippi.mp3", "full_file": "Costa Rica, Leipuri Hiiva.mp3"},
     {"id": 14, "title": "Kusi noussu hattuun taas", "artist": "Deata", "country": "it.png", "file": "Deata, Kusi noussu hattuun taas, Italia klippi.mp3", "full_file": "Deata, Kusi noussu hattuun taas, Italia.mp3"},
@@ -106,7 +114,7 @@ def app_page():
     if not session.get("user"):
         return redirect(url_for("select_user"))
 
-    init_db()
+    #init_db()
 
     return render_template(
         "app.html",
