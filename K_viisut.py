@@ -65,7 +65,7 @@ SONGS = [
     {"id": 8, "title": "Tässä on eteläafrikkalaisen selkäranka", "artist": "Kyrillos Turpaanvetajaios",
      "country": "cy.png", "file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka klippi.mp3",
      "full_file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka.mpeg"},
-    {"id": 18, "title": "40. Sinfonia", "artist": "Mou Tsaart", "country": "li.png", "file": "Mou Tsaart - 40. Sinfonia klippi.mp3", "full_file": "Mou Tsaart - 40. Sinfonia.mp3"},
+    {"id": 19, "title": "40. Sinfonia", "artist": "Mou Tsaart", "country": "li.png", "file": "Mou Tsaart - 40. Sinfonia klippi.mp3", "full_file": "Mou Tsaart - 40. Sinfonia.mp3"},
     {"id": 11, "title": "Neuvostoliiton kansallislaulu", "artist": "Paavi", "country": "sg.png", "file": "Paavi, Neuvostoliiton kansallislaulu klippi.mp3", "full_file": "Paavi, Neuvostoliiton kansallislaulu.mp3"},
     {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fr.png", "file": "Paspartuu klippi.mp3", "full_file": "Paspartuu - Kyrsäkosken kasvatti, Ranska.mpeg"},
     {"id": 18, "title": "Oon onnellinen", "artist": "Pikku Tuomas", "country": "fi.png", "file": "Pikku Tuomas - Oon onnellinen klippi.mp3", "full_file": "Pikku Tuomas - Oon onnellinen.mpeg"},
