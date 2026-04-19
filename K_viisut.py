@@ -69,6 +69,8 @@ SONGS = [
     {"id": 11, "title": "Neuvostoliiton kansallislaulu", "artist": "Paavi", "country": "sg.png", "file": "Paavi, Neuvostoliiton kansallislaulu klippi.mp3", "full_file": "Paavi, Neuvostoliiton kansallislaulu.mp3"},
     {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fr.png", "file": "Paspartuu klippi.mp3", "full_file": "Paspartuu - Kyrsäkosken kasvatti, Ranska.mpeg"},
     {"id": 18, "title": "Oon onnellinen", "artist": "Pikku Tuomas", "country": "fi.png", "file": "Pikku Tuomas - Oon onnellinen klippi.mp3", "full_file": "Pikku Tuomas - Oon onnellinen.mpeg"},
+    {"id": 20, "title": "Oon vapaa", "artist": "Pohjois-Korea", "country": "kp.png",
+     "file": "Pohjois-Korea - Oon vapaa klippi.mp3", "full_file": "Pohjois-Korea - Oon vapaa.mpeg"},
     {"id": 9, "title": "Olé", "artist": "Polle", "country": "lv.png", "file": "Polle, Ole klippi.mp3", "full_file": "Polle, Ole.mpeg"},
     {"id": 4, "title": "Kaksi naamaa", "artist": "Tatjaana", "country": "by.png", "file": "Kaksi naamaa klippi.mp3",
      "full_file": "Valko-Venäjä Kaksi naamaa.mpeg"}
