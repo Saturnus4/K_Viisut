@@ -54,18 +54,23 @@ SONGS = [
     {"id": 13, "title": "Leipuri Hiiva", "artist": "Costa Rica", "country": "cr.png", "file": "Costa Rica, Leipuri Hiiva klippi.mp3", "full_file": "Costa Rica, Leipuri Hiiva.mp3"},
     {"id": 14, "title": "Kusi noussu hattuun taas", "artist": "Deata", "country": "it.png", "file": "Deata, Kusi noussu hattuun taas, Italia klippi.mp3", "full_file": "Deata, Kusi noussu hattuun taas, Italia.mp3"},
     {"id": 17, "title": "Ja Panini", "artist": "DJ MuikunKeittäjä", "country": "np.png", "file": "DJ MuikunKeittäjä - Ja Panini klippi.mp3", "full_file": "DJ MuikunKeittäjä - Ja Panini.mpeg"},
+    {"id": 21, "title": "OG-Jakki", "artist": "Itävalta", "country": "at.png", "file": "Itävalta - OG-Jakki klippi.mp3", "full_file": "Itävalta - OG-Jakki.mp3"},
+    {"id": 23, "title": "Pikku-Tuomas", "artist": "Jormakka", "country": "ca.png", "file": "Jormakka - Pikku-Tuomas klippi.mp3", "full_file": "Jormakka - Pikku-Tuomas.mpeg"},
     {"id": 2, "title": "Kynitty", "artist": "Jyrki feat. Neponen", "country": "qa.png",
      "file": "Jyrki feat. Neponen klippi.mp3", "full_file": "Jyrki feat. Neponen - Kynitty, Qatar.mpeg"},
     {"id": 5, "title": "Ikean lihapulla", "artist": "Jåger Mazer", "country": "se.png",
      "file": "Jåger Mazer klippi.mp3", "full_file": "Jåger Mazer - Ikean lihapulla, Ruotsi.mpeg"},
     {"id": 7, "title": "Nyt lähtee nirri", "artist": "Kaapon ystävät", "country": "ar.png",
      "file": "Kaapon ystävät, Nyt lähtee nirri klippi.mp3", "full_file": "Kaapon ystävät, Nyt lähtee nirri.mpeg"},
+    {"id": 22, "title": "Viidakon kaiku", "artist": "Kaķke", "country": "kh.png", "file": "Kakke - Viidakon kaiku klippi.mp3", "full_file": "Kakke - Viidakon kaiku.mpeg"},
     {"id": 3, "title": "Muukalainen", "artist": "Kapselihuoneen Kaapo", "country": "saturn.png",
      "file": "Kapselihuoneen Kaapo klippi.mp3", "full_file": "Kapselihuoneen Kaapo - Muukalainen, Avaruus.mpeg"},
     {"id": 8, "title": "Tässä on eteläafrikkalaisen selkäranka", "artist": "Kyrillos Turpaanvetajaios",
      "country": "cy.png", "file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka klippi.mp3",
      "full_file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka.mpeg"},
+    {"id": 25, "title": "Bojan", "artist": "Louis Chicken", "country": "ad.png", "file": "Louis Chicken - Bojan klippi.mp3", "full_file": "Louis Chicken - Bojan.mpeg"},
     {"id": 19, "title": "40. Sinfonia", "artist": "Mou Tsaart", "country": "li.png", "file": "Mou Tsaart - 40. Sinfonia klippi.mp3", "full_file": "Mou Tsaart - 40. Sinfonia.mp3"},
+    {"id": 24, "title": "Totuus sattuu", "artist": "Mr. Totuus", "country": "nr.png", "file": "Mr. Totuus - Totuus sattuu klippi.mp3", "full_file": "Mr. Totuus - Totuus sattuu.mpeg"},
     {"id": 11, "title": "Neuvostoliiton kansallislaulu", "artist": "Paavi", "country": "sg.png", "file": "Paavi, Neuvostoliiton kansallislaulu klippi.mp3", "full_file": "Paavi, Neuvostoliiton kansallislaulu.mp3"},
     {"id": 1, "title": "Kyrsäkosken kasvatti", "artist": "Paspartuu", "country": "fr.png", "file": "Paspartuu klippi.mp3", "full_file": "Paspartuu - Kyrsäkosken kasvatti, Ranska.mpeg"},
     {"id": 18, "title": "Oon onnellinen", "artist": "Pikku Tuomas", "country": "fi.png", "file": "Pikku Tuomas - Oon onnellinen klippi.mp3", "full_file": "Pikku Tuomas - Oon onnellinen.mpeg"},
@@ -74,6 +79,7 @@ SONGS = [
     {"id": 9, "title": "Olé", "artist": "Polle", "country": "lv.png", "file": "Polle, Ole klippi.mp3", "full_file": "Polle, Ole.mpeg"},
     {"id": 4, "title": "Kaksi naamaa", "artist": "Tatjaana", "country": "by.png", "file": "Kaksi naamaa klippi.mp3",
      "full_file": "Valko-Venäjä Kaksi naamaa.mpeg"}
+
 
 
 ]
