@@ -46,6 +46,9 @@ def init_db():
 SONGS = [
     {"id": 10, "title": "Mä elän", "artist": "Ahmis Zoni", "country": "cu.png",
      "file": "Ahmis Zoni, Mä elän klippi.mp3", "full_file": "Ahmis Zoni, Mä elän.mp3"},
+    {"id": 27, "title": "Millin geenit", "artist": "Bagdad-Bob & Eisenhower", "country": "tm.png",
+     "file": "Bagdad-Bob & Eisenhower - Millin geenit klippi.mp3",
+     "full_file": "Bagdad-Bob & Eisenhower - Millin geenit.mpeg"},
     {"id": 6, "title": "Mun tunteet", "artist": "Barracks O'Bama", "country": "us.png",
      "file": "Barracks OBama klippi.mp3", "full_file": "Barracks OBama.mpeg"},
     {"id": 12, "title": "DeathMetalPate", "artist": "Chile", "country": "cl.png", "file": "Chile, DeathMetalPate klippi.mp3", "full_file": "Chile, DeathMetalPate.mp3"},
@@ -54,6 +57,9 @@ SONGS = [
     {"id": 13, "title": "Leipuri Hiiva", "artist": "Costa Rica", "country": "cr.png", "file": "Costa Rica, Leipuri Hiiva klippi.mp3", "full_file": "Costa Rica, Leipuri Hiiva.mp3"},
     {"id": 14, "title": "Kusi noussu hattuun taas", "artist": "Deata", "country": "it.png", "file": "Deata, Kusi noussu hattuun taas, Italia klippi.mp3", "full_file": "Deata, Kusi noussu hattuun taas, Italia.mp3"},
     {"id": 17, "title": "Ja Panini", "artist": "DJ MuikunKeittäjä", "country": "np.png", "file": "DJ MuikunKeittäjä - Ja Panini klippi.mp3", "full_file": "DJ MuikunKeittäjä - Ja Panini.mpeg"},
+    {"id": 28, "title": "Hasca, hasca", "artist": "El Cringe", "country": "mx.png",
+     "file": "El Cringe - Hasca, hasca klippi.mp3", "full_file": "El Cringe - Hasca, hasca.mpeg"},
+    {"id": 26, "title": "Pikku-Jortsu", "artist": "Emo", "country": "ch.png", "file": "Emo - Pikku-Jortsu klippi.mp3", "full_file": "Emo - Pikku-Jortsu.mpeg"},
     {"id": 21, "title": "OG-Jakki", "artist": "Itävalta", "country": "at.png", "file": "Itävalta - OG-Jakki klippi.mp3", "full_file": "Itävalta - OG-Jakki.mp3"},
     {"id": 23, "title": "Pikku-Tuomas", "artist": "Jormakka", "country": "ca.png", "file": "Jormakka - Pikku-Tuomas klippi.mp3", "full_file": "Jormakka - Pikku-Tuomas.mpeg"},
     {"id": 2, "title": "Kynitty", "artist": "Jyrki feat. Neponen", "country": "qa.png",
@@ -78,9 +84,7 @@ SONGS = [
      "file": "Pohjois-Korea - Oon vapaa klippi.mp3", "full_file": "Pohjois-Korea - Oon vapaa.mpeg"},
     {"id": 9, "title": "Olé", "artist": "Polle", "country": "lv.png", "file": "Polle, Ole klippi.mp3", "full_file": "Polle, Ole.mpeg"},
     {"id": 4, "title": "Kaksi naamaa", "artist": "Tatjaana", "country": "by.png", "file": "Kaksi naamaa klippi.mp3",
-     "full_file": "Valko-Venäjä Kaksi naamaa.mpeg"}
-
-
+     "full_file": "Valko-Venäjä Kaksi naamaa.mpeg"},
 
 ]
 #{"id": , "title": "", "artist": "", "country": "", "file": "", "full_file": ""}
