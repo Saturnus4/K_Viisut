@@ -1,0 +1,10 @@
+Audacity trim: CTRL + T
+
+.venv\Scripts\activate
+set DATABASE_URL=
+K_viisut.py
+
+
+git add .
+git commit -m""
+git push

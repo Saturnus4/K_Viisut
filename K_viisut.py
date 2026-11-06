@@ -73,7 +73,7 @@ SONGS = [
     {"id": 22, "title": "Viidakon kaiku", "artist": "Kaķke", "country": "kh.png", "file": "Kakke - Viidakon kaiku klippi.mp3", "full_file": "Kakke - Viidakon kaiku.mpeg"},
     {"id": 3, "title": "Muukalainen", "artist": "Kapselihuoneen Kaapo", "country": "saturn.png",
      "file": "Kapselihuoneen Kaapo klippi.mp3", "full_file": "Kapselihuoneen Kaapo - Muukalainen, Avaruus.mpeg"},
-    {"id": 28, "title": "Costa Ricassa on tuomionpäivä", "artist": "Kuolema", "country": "ci.png", "file": "Kuolema, Costa Ricassa on tuomionpäivä klippi.mp3", "full_file": "Kuolema, Costa Ricassa on tuomionpäivä.mpeg"},
+    {"id": 32, "title": "Costa Ricassa on tuomionpäivä", "artist": "Kuolema", "country": "ci.png", "file": "Kuolema, Costa Ricassa on tuomionpäivä klippi.mp3", "full_file": "Kuolema, Costa Ricassa on tuomionpäivä.mpeg"},
     {"id": 8, "title": "Tässä on eteläafrikkalaisen selkäranka", "artist": "Kyrillos Turpaanvetajaios",
      "country": "cy.png", "file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka klippi.mp3",
      "full_file": "Kyrillos, Tässä on Eteläafrikkalaisen selkäranka.mpeg"},
