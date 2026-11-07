@@ -172,7 +172,11 @@ transition: background-color 0.2s;
 }
 
 .song-item.top10_color {
-	background: linear-gradient(to right, #d6ecff, #f9f9f9);
+    background: linear-gradient(to right, #5f78d4, #f9f9f9);
+}
+
+.song-item.top15_color {
+    background: linear-gradient(to right, #a8b8f5, #f9f9f9);
 }
 
 .drag-ghost { 
@@ -286,7 +290,7 @@ opacity: 0.5;
 </div>
 
 <script>
-const POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1];
+const POINTS = [24, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1];
 </script>
 
 <script>
@@ -304,7 +308,7 @@ function updateRanks() {
         pointsSpan.textContent = index < POINTS.length ? POINTS[index] : "";
 
         // Reset classes
-        item.classList.remove("gold", "silver", "bronze", "top10_color");
+        item.classList.remove("gold", "silver", "bronze", "top10_color", "top15_color");
 
         // Apply colors
         if (index === 0) {
@@ -318,6 +322,9 @@ function updateRanks() {
         } 
         else if (index >= 3 && index <= 9) {
             item.classList.add("top10_color");
+        }
+        else if (index >= 10 && index <= 14) {
+            item.classList.add("top15_color");
         }
     });
 }</script>

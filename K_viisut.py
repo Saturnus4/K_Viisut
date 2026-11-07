@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = "supersecretkey"
 PASSWORD = "Jormakka"
 USERS = ["Jura", "Mirko", "Patrik", "Riko", "Tuomas"]
-POINTS = [12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
+POINTS = [24, 20, 18, 16, 14, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1]
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
